@@ -4,11 +4,11 @@ import Link from "next/link";
 function LoginDisplay() {
   const { data: session } = useSession();
   return (
-    <div>
+    <nav className="flex gap-5 px-8 py-5">
       {!session && (
         <>
-          <h1 className="text-red-500 text-lg">You are not signed in</h1> <br />
-          <button className=" bg-red-500 p-5 rounded-xl " onClick={signIn}>
+          <h1 className="mr-5">You are not signed in</h1> <br />
+          <button className=" " onClick={signIn}>
             Sign in
           </button>
         </>
@@ -16,17 +16,11 @@ function LoginDisplay() {
 
       {session && (
         <>
-          <h1>Signed in as {session.user.email} </h1> <br />
-          <h2>
-            Go to your{" "}
-            <Link href="/userselect">
-              <a>Last.fm Top Tracks</a>
-            </Link>{" "}
-          </h2>
+          <h1 className="mr-5">Signed in as {session.user.name} </h1> <br />
           <button onClick={signOut}>Sign out</button>
         </>
       )}
-    </div>
+    </nav>
   );
 }
 

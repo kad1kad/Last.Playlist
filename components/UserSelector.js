@@ -35,19 +35,22 @@ function UserSelector() {
       <form onSubmit={search}>
         <input
           type="text"
-          className="border-slate-900 rounded-lg border-2 mr-5 py-1 px-3"
+          className="border-slate-900 rounded-lg border-2 mr-5 py-1 px-3 text-slate-900"
           onChange={handleInput}
           placeholder="Search for username"
         />
         <button
           type="submit"
-          className="bg-slate-900 tracking-wider text-gray-50 px-4 py-[.4rem] rounded-2xl hover:scale-105  active:scale-95 transition-all"
+          className="bg-slate-50 tracking-wider text-slate-900 px-4 py-[.3rem] rounded-full hover:scale-105  active:scale-95 transition-all"
         >
           Submit
         </button>
       </form>
 
-      <select onChange={handlePeriod}>
+      <select
+        onChange={handlePeriod}
+        className="text-slate-900 rounded-md mt-3"
+      >
         {periods.map((period, index) => (
           <option key={index} value={period}>
             {period}
