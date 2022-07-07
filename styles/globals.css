@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#userInput {
+  width: 15rem;
+  transition: width 0.3s ease-in-out;
+}
+
+#userInput:focus {
+  width: 20rem;
+  outline: none;
+}
