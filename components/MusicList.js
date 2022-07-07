@@ -3,7 +3,7 @@ import MusicItem from "./MusicItem";
 function MusicList({ musicItems }) {
   console.log(musicItems);
   return (
-    <section className="pt-5">
+    <section>
       <ul>
         {musicItems.toptracks?.track.map((item, index) => (
           <MusicItem key={index} item={item} />
