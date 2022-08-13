@@ -1,5 +1,7 @@
-import { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
+import useSpotify from "../hooks/useSpotify";
 
 // const spotifyApi = new SpotifyWebApi({
 //   clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
@@ -7,11 +9,19 @@ import SpotifyWebApi from "spotify-web-api-node";
 // });
 
 function MusicItem({ item }) {
-  // useEffect(() => {
-  //   spotifyApi.searchTracks(item.name).then((res) => {
-  //     console.log(res);
-  //   });
-  // }, [item.name]);
+  const { data: session, status } = useSession();
+
+  const [tracks, setTracks] = useState([]);
+
+  const spotifyApi = useSpotify();
+
+  useEffect(() => {
+    if (spotifyApi.getAccessToken()) {
+      spotifyApi.searchTracks(item.name).then((res) => {
+        console.log(res);
+      });
+    }
+  }, [session, spotifyApi]);
 
   return (
     <>
