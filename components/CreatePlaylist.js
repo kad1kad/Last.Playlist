@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
 import useSpotify from "../hooks/useSpotify";
 
-function CreatePlaylist({ songTitle, artist }) {
+function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
   function addZero(i) {
     if (i < 10) {
       i = "0" + i;
@@ -15,7 +15,12 @@ function CreatePlaylist({ songTitle, artist }) {
   let m = addZero(d.getMinutes());
   let time = h + ":" + m;
 
-  console.log([songTitle, artist]);
+  const today = new Date();
+  let dd = String(today.getDate()).padStart(2, "0");
+  let mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  let yyyy = today.getFullYear();
+
+  const date = dd + "/" + mm + "/" + yyyy;
 
   const { data: session, status } = useSession();
 
@@ -25,8 +30,8 @@ function CreatePlaylist({ songTitle, artist }) {
   const buildPlaylist = () => {
     // Create Playlist
     spotifyApi
-      .createPlaylist(`Playlist ${time}`, {
-        description: "My description",
+      .createPlaylist(`${userName} ${selectedPeriod} most played`, {
+        description: `Generated: ${date} ${time}`,
         public: false,
       })
       .then(
@@ -44,19 +49,25 @@ function CreatePlaylist({ songTitle, artist }) {
         spotifyApi
           .searchTracks(`track:${songTitle[i]} artist:${artist[i]}`)
           .then((res) => {
+            // console.log(res);
             const spotifyId = res.body.tracks.items[0]?.id;
-            idList.push(`spotify:track:${spotifyId}`);
+
+            //  Push to arr if song found
+            if (res.body.tracks.items.length > 0) {
+              idList.push(`spotify:track:${spotifyId}`);
+            }
           });
       }
     }
 
-    console.log(idList);
+    console.log([idList]);
 
     // Get Id from generated Playlist
     setTimeout(() => {
       spotifyApi.getUserPlaylists(session.user.name).then(
         function (data) {
           const generatedPlaylistId = data.body.items[0].id;
+
           console.log("Generated Playlist ID:", generatedPlaylistId);
 
           // Add tracks to generated playlist
