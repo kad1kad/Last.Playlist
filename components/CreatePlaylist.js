@@ -2,37 +2,19 @@ import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
 import useSpotify from "../hooks/useSpotify";
 
-// // Create a private playlist
-// spotifyApi
-//   .createPlaylist("My playlist", {
-//     description: "My description",
-//     public: true,
-//   })
-//   .then(
-//     function (data) {
-//       console.log("Created playlist!");
-//     },
-//     function (err) {
-//       console.log("Something went wrong!", err);
-//     }
-//   );
-
-// // Add tracks to a playlist
-// spotifyApi
-//   .addTracksToPlaylist("5ieJqeLJjjI8iJWaxeBLuK", [
-//     "spotify:track:4iV5W9uYEdYUVa79Axb7Rh",
-//     "spotify:track:1301WleyT98MSxVHPZCA6M",
-//   ])
-//   .then(
-//     function (data) {
-//       console.log("Added tracks to playlist!");
-//     },
-//     function (err) {
-//       console.log("Something went wrong!", err);
-//     }
-//   );
-
 function CreatePlaylist({ songTitle, artist }) {
+  function addZero(i) {
+    if (i < 10) {
+      i = "0" + i;
+    }
+    return i;
+  }
+
+  const d = new Date();
+  let h = addZero(d.getHours());
+  let m = addZero(d.getMinutes());
+  let time = h + ":" + m;
+
   console.log([songTitle, artist]);
 
   const { data: session, status } = useSession();
@@ -41,17 +23,57 @@ function CreatePlaylist({ songTitle, artist }) {
   const idList = [];
 
   const buildPlaylist = () => {
+    // Create Playlist
+    spotifyApi
+      .createPlaylist(`Playlist ${time}`, {
+        description: "My description",
+        public: false,
+      })
+      .then(
+        function (data) {
+          console.log("Created playlist!");
+        },
+        function (err) {
+          console.log("Something went wrong!", err);
+        }
+      );
+
+    // Convert last.fm song data in to spoity IDs
     for (let i = 0; i < 20; i++) {
       if (spotifyApi.getAccessToken()) {
         spotifyApi
           .searchTracks(`track:${songTitle[i]} artist:${artist[i]}`)
           .then((res) => {
             const spotifyId = res.body.tracks.items[0]?.id;
-            idList.push(spotifyId);
+            idList.push(`spotify:track:${spotifyId}`);
           });
       }
     }
+
     console.log(idList);
+
+    // Get Id from generated Playlist
+    setTimeout(() => {
+      spotifyApi.getUserPlaylists(session.user.name).then(
+        function (data) {
+          const generatedPlaylistId = data.body.items[0].id;
+          console.log("Generated Playlist ID:", generatedPlaylistId);
+
+          // Add tracks to generated playlist
+          spotifyApi.addTracksToPlaylist(generatedPlaylistId, idList).then(
+            function (data) {
+              console.log("Added tracks to playlist!");
+            },
+            function (err) {
+              console.log("Something went wrong!", err);
+            }
+          );
+        },
+        function (err) {
+          console.log("Something went wrong!", err);
+        }
+      );
+    }, 1000);
   };
 
   return (
