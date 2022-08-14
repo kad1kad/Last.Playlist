@@ -3,25 +3,23 @@ import { useEffect, useState } from "react";
 import SpotifyWebApi from "spotify-web-api-node";
 import useSpotify from "../hooks/useSpotify";
 
-// const spotifyApi = new SpotifyWebApi({
-//   clientId: process.env.NEXT_PUBLIC_CLIENT_ID,
-//   accessToken: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
-// });
-
 function MusicItem({ item }) {
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
-  const [tracks, setTracks] = useState([]);
+  // const [tracks, setTracks] = useState([]);
 
-  const spotifyApi = useSpotify();
+  // const spotifyApi = useSpotify();
 
-  useEffect(() => {
-    if (spotifyApi.getAccessToken()) {
-      spotifyApi.searchTracks(item.name).then((res) => {
-        console.log(res);
-      });
-    }
-  }, [session, spotifyApi]);
+  // useEffect(() => {
+  //   if (spotifyApi.getAccessToken()) {
+  //     spotifyApi
+  //       .searchTracks(`track:${item.name} artist:${item.artist.name}`)
+  //       .then((res) => {
+  //         const spotifyId = res.body.tracks.items[0]?.id;
+  //         // console.log(spotifyId);
+  //       });
+  //   }
+  // }, [item.artist.name, item.name, session, spotifyApi]);
 
   return (
     <>
