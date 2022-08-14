@@ -2,6 +2,7 @@ import { useState } from "react";
 import MusicList from "./MusicList";
 import periods from "../utils/periods";
 import { motion } from "framer-motion";
+import CreatePlaylist from "./CreatePlaylist";
 
 function UserSelector() {
   const [formInput, setFormInput] = useState({});
@@ -20,6 +21,9 @@ function UserSelector() {
     const musicItems = await res.json();
     setSearchResult(musicItems);
   };
+
+  const songTitle = searchResult.toptracks?.track.map((item) => item.name);
+  const artist = searchResult.toptracks?.track.map((item) => item.artist.name);
 
   const [selectedPeriod, setSelectedPeriod] = useState("overall");
 
@@ -67,6 +71,8 @@ function UserSelector() {
       </select>
 
       <MusicList musicItems={searchResult} />
+
+      <CreatePlaylist songTitle={songTitle} artist={artist} />
     </motion.main>
   );
 }
