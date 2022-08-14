@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import useSpotify from "../hooks/useSpotify";
 
 // // Create a private playlist
@@ -38,10 +38,9 @@ function CreatePlaylist({ songTitle, artist }) {
   const { data: session, status } = useSession();
 
   const spotifyApi = useSpotify();
-
   const idList = [];
 
-  useEffect(() => {
+  const buildPlaylist = () => {
     for (let i = 0; i < 20; i++) {
       if (spotifyApi.getAccessToken()) {
         spotifyApi
@@ -50,12 +49,21 @@ function CreatePlaylist({ songTitle, artist }) {
             const spotifyId = res.body.tracks.items[0]?.id;
             idList.push(spotifyId);
           });
-        console.log(idList);
       }
     }
-  }, [songTitle, artist, session, spotifyApi]);
+    console.log(idList);
+  };
 
-  return <div>CreatePlaylist</div>;
+  return (
+    <div>
+      <button
+        className="bg-[#18D860] tracking-wider text-gray-50 px-9 py-4 rounded-full hover:scale-105  active:scale-95 transition-all"
+        onClick={buildPlaylist}
+      >
+        Create Spotify Playlist
+      </button>
+    </div>
+  );
 }
 
 export default CreatePlaylist;
