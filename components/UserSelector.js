@@ -72,7 +72,12 @@ function UserSelector() {
 
       <MusicList musicItems={searchResult} />
 
-      <CreatePlaylist songTitle={songTitle} artist={artist} />
+      <CreatePlaylist
+        songTitle={songTitle}
+        artist={artist}
+        selectedPeriod={selectedPeriod}
+        userName={formInput}
+      />
     </motion.main>
   );
 }
