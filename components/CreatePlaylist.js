@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect } from "react";
 import useSpotify from "../hooks/useSpotify";
+import LoadingScreen from "./LoadingScreen";
 
 function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
   function addZero(i) {
@@ -92,7 +93,9 @@ function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
       <button
         className="bg-[#18D860] tracking-wider text-gray-50 px-9 py-4 rounded-full hover:scale-105  active:scale-95 transition-all"
         onClick={buildPlaylist}
+        onTouchEnd={buildPlaylist}
       >
+        {/* {data ? "Create Spotify Playlist" : "DONE"} */}
         Create Spotify Playlist
       </button>
     </div>
