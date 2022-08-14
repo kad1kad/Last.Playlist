@@ -3,11 +3,21 @@
 @tailwind utilities;
 
 #userInput {
-  width: 15rem;
+  width: 12rem;
   transition: width 0.3s ease-in-out;
 }
 
 #userInput:focus {
-  width: 20rem;
+  width: 15rem;
   outline: none;
+}
+
+@media screen and (min-width: 500px) {
+  #userInput {
+    width: 18rem;
+  }
+
+  #userInput:focus {
+    width: 20rem;
+  }
 }
