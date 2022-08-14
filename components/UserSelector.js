@@ -36,12 +36,12 @@ function UserSelector() {
     <motion.main
       initial={{ opacity: 0, y: -60 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ type: "spring", damping: 50, duration: 1 }}
+      transition={{ type: "spring", damping: 20, duration: 0.5 }}
       className="py-4 flex flex-col justify-center items-center min-h-[88vh] scroll-smooth"
     >
       <motion.form
         layout
-        transition={{ type: "spring", duration: 1.4 }}
+        transition={{ type: "spring", duration: 1.3 }}
         onSubmit={search}
       >
         <input
@@ -72,12 +72,20 @@ function UserSelector() {
 
       <MusicList musicItems={searchResult} />
 
-      <CreatePlaylist
-        songTitle={songTitle}
-        artist={artist}
-        selectedPeriod={selectedPeriod}
-        userName={formInput}
-      />
+      {searchResult.length === undefined && (
+        <motion.div
+          initial={{ opacity: 0, y: -60 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", damping: 20, duration: 0.3 }}
+        >
+          <CreatePlaylist
+            songTitle={songTitle}
+            artist={artist}
+            selectedPeriod={selectedPeriod}
+            userName={formInput}
+          />
+        </motion.div>
+      )}
     </motion.main>
   );
 }
