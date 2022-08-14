@@ -16,7 +16,7 @@ function UserSelector() {
   const search = async (e) => {
     e.preventDefault();
     const res = await fetch(
-      `http://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=${formInput}&limit=20&period=${selectedPeriod}&api_key=dd0a78c04c8e1bd9d7719ab1ef184ad1&format=json`
+      `https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=${formInput}&limit=20&period=${selectedPeriod}&api_key=dd0a78c04c8e1bd9d7719ab1ef184ad1&format=json`
     );
     const musicItems = await res.json();
     setSearchResult(musicItems);
@@ -53,7 +53,7 @@ function UserSelector() {
         />
         <button
           type="submit"
-          className="bg-blue-300 tracking-widest text-slate-900 px-8 py-4 rounded-full hover:scale-105 transition-all active:scale-95 w-26"
+          className="bg-blue-500 tracking-widest text-slate-900 px-8 py-4 rounded-full hover:scale-105 transition-all active:scale-95 w-26"
         >
           Submit
         </button>
