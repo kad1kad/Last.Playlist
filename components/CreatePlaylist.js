@@ -1,7 +1,6 @@
 import { useSession, signIn } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
 import useSpotify from "../hooks/useSpotify";
-import LoadingScreen from "./LoadingScreen";
 
 function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
   function addZero(i) {
