@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSession, signIn } from "next-auth/react";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import useSpotify from "../hooks/useSpotify";
 
 function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
@@ -43,7 +45,15 @@ function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
           function (data) {
             console.log("Created playlist!");
             // Loading Text
-            setButtonText("Generating Playlist...");
+            setButtonText(
+              <div className="flex items-center gap-2">
+                Generating Playlist
+                <FontAwesomeIcon
+                  className="fa-solid fa-spinner fa-spin-pulse fa-lg"
+                  icon={faSpinner}
+                />
+              </div>
+            );
           },
           function (err) {
             console.log("Something went wrong!", err);
@@ -83,11 +93,19 @@ function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
               function (data) {
                 console.log("Added tracks to playlist!");
 
-                setButtonText("Done!");
+                setButtonText(
+                  <div className="flex items-center gap-2">
+                    Playlist generated
+                    <FontAwesomeIcon
+                      className="fa-solid fa-spinner fa-beat fa-lg"
+                      icon={faCheck}
+                    />
+                  </div>
+                );
 
                 setTimeout(() => {
                   setButtonText("Create Spotify Playlist");
-                }, 2000);
+                }, 4000);
               },
               function (err) {
                 console.log("Something went wrong!", err);
@@ -107,7 +125,7 @@ function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
   return (
     <div>
       <button
-        className="bg-[#18D860] tracking-wider text-gray-50 px-9 py-4 rounded-full hover:scale-105  active:scale-95 transition-all w-72"
+        className="bg-[#18D860] tracking-wider text-gray-50 px-9 py-4 rounded-full hover:scale-105  active:scale-95 transition-all w-72 flex gap-2 justify-center items-center"
         onClick={buildPlaylist}
       >
         {buttonText}
