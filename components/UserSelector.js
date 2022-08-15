@@ -72,9 +72,9 @@ function UserSelector() {
 
       <MusicList musicItems={searchResult} />
 
-      {searchResult.length === undefined && (
+      {searchResult.length === undefined && formInput.length >= 1 && (
         <motion.div
-          initial={{ opacity: 0, y: -60 }}
+          initial={{ opacity: 0, y: -300 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ type: "spring", damping: 20, duration: 0.3 }}
         >
