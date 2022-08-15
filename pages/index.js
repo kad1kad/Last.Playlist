@@ -4,17 +4,16 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="bg-[#101113] w-full text-slate-50 min-h-[100vh] pt-5">
-      <header className="px-4 flex justify-between items-center">
+    <div className=" bg-neutral-100 w-full text-slate-900 min-h-[100vh]">
+      <header className="px-4 flex justify-between items-center bg-[#101113] py-5">
         <div>
-          <Link href="/">
-            <a>
-              <h1 className="text-2xl tracking-widest font-bold text-blue-500">
-                Last.Playlist
-              </h1>
-            </a>
-          </Link>
-          <h2 className="text-sm font-light tracking-wider">
+          <a>
+            <h1 className="text-2xl tracking-widest font-bold text-neutral-200">
+              Last.Playlist
+            </h1>
+          </a>
+
+          <h2 className="text-sm font-light tracking-wider text-neutral-200">
             Last.fm to Spotify Playlist
           </h2>
         </div>

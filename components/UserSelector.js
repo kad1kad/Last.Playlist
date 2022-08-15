@@ -47,28 +47,27 @@ function UserSelector() {
         <input
           id="userInput"
           type="text"
-          className="border-black rounded-full border-2 mr-5 py-4 px-8 text-slate-900 bg-blue-50"
+          className="rounded-full border-2 mr-5 py-4 px-8 text-slate-900 bg-white tracking-wide"
           onChange={handleInput}
-          placeholder="Search for username"
+          placeholder="Search username"
         />
         <button
           type="submit"
-          className="bg-blue-500 tracking-widest text-slate-900 px-8 py-4 rounded-full hover:scale-105 transition-all active:scale-95 w-26"
+          className="bg-[#101113] tracking-widest text-neutral-200 px-8 py-4 rounded-full hover:scale-105 transition-all active:scale-95 w-26"
         >
           Submit
         </button>
       </motion.form>
-
-      <select
-        onChange={handlePeriod}
-        className="text-slate-900 rounded-md mt-3"
-      >
-        {periods.map((period, index) => (
-          <option key={index} value={period}>
-            {period}
-          </option>
-        ))}
-      </select>
+      <div className="flex items-center mt-4 gap-3">
+        <p>Top Tracks period:</p>
+        <select onChange={handlePeriod} className="text-slate-900 rounded-md ">
+          {periods.map((period, index) => (
+            <option key={index} value={period}>
+              {period}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <MusicList musicItems={searchResult} />
 
