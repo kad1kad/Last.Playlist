@@ -22,6 +22,11 @@ export default function Home() {
     setSelectedPeriod(period);
   }
 
+  function handleReset() {
+    setSearchResult([]);
+    setIsActive(false);
+  }
+
   const search = async (e) => {
     e.preventDefault();
     const res = await fetch(
@@ -40,7 +45,10 @@ export default function Home() {
       <header className="px-4 flex justify-between items-center bg-[#101113] py-5">
         <div>
           <a>
-            <h1 className="text-2xl tracking-widest font-bold text-neutral-200">
+            <h1
+              className="text-2xl tracking-widest font-bold text-neutral-200 cursor-pointer"
+              onClick={handleReset}
+            >
               Last.Playlist
             </h1>
           </a>
