@@ -17,9 +17,15 @@ export default function Home() {
     setFormInput(userInput);
   }
 
+  console.log(formInput);
+
   function handlePeriod(e) {
     const period = e.target.value;
     setSelectedPeriod(period);
+
+    if (formInput.length > 2) {
+      search(e);
+    }
   }
 
   function handleReset() {
@@ -79,18 +85,12 @@ export default function Home() {
         <MusicList musicItems={searchResult} />
 
         {searchResult.length === undefined && formInput.length >= 1 && (
-          <motion.div
-            initial={{ opacity: 0, y: -300 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", damping: 20, duration: 0.3 }}
-          >
-            <CreatePlaylist
-              songTitle={songTitle}
-              artist={artist}
-              selectedPeriod={selectedPeriod}
-              userName={formInput}
-            />
-          </motion.div>
+          <CreatePlaylist
+            songTitle={songTitle}
+            artist={artist}
+            selectedPeriod={selectedPeriod}
+            userName={formInput}
+          />
         )}
       </main>
     </div>
