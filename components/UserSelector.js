@@ -49,8 +49,9 @@ function UserSelector() {
           type="text"
           className="rounded-full border-2 mr-5 py-4 px-8 text-slate-900 bg-white tracking-wide"
           onChange={handleInput}
-          placeholder="Search username"
+          placeholder="Last.fm User"
           spellCheck="false"
+          required
         />
         <button
           type="submit"
