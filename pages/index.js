@@ -2,8 +2,7 @@ import LoginDisplay from "../components/LoginDisplay";
 import { useState } from "react";
 import MusicList from "../components/MusicList";
 import CreatePlaylist from "../components/CreatePlaylist";
-import { motion } from "framer-motion";
-import PeriodSelector from "../components/periodSelector";
+import PeriodSelector from "../components/PeriodSelector";
 import UserInputField from "../components/UserInputField";
 
 export default function Home() {
