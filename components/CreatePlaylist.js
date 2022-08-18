@@ -47,7 +47,7 @@ function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
             console.log("Created playlist!");
             // Loading Text
             setButtonText(
-              <div className="flex items-center gap-2">
+              <div className="flex justify-center gap-2">
                 Generating Playlist
                 <FontAwesomeIcon
                   className="fa-solid fa-spinner fa-spin-pulse fa-lg"
@@ -95,7 +95,7 @@ function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
                 console.log("Added tracks to playlist!");
 
                 setButtonText(
-                  <div className="flex items-center gap-2">
+                  <div className="flex justify-center gap-2">
                     Playlist generated
                     <FontAwesomeIcon
                       className="fa-solid fa-spinner fa-beat fa-lg"
@@ -131,7 +131,7 @@ function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
       transition={{ type: "spring", damping: 20, duration: 0.3 }}
     >
       <button
-        className="bg-[#18D860] tracking-wider text-gray-50 px-9 py-4 rounded-full hover:scale-105  active:scale-95 transition-all w-72  gap-2 "
+        className="bg-[#18D860] tracking-wider text-gray-50 px-9 py-4 rounded-full hover:scale-105 active:scale-95 transition-all w-72  gap-2"
         onClick={buildPlaylist}
       >
         {buttonText}
