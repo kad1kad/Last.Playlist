@@ -3,6 +3,7 @@ import { faSpinner, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useSession, signIn } from "next-auth/react";
 import { useState } from "react";
 import useSpotify from "../hooks/useSpotify";
+import { motion } from "framer-motion";
 
 function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
   function addZero(i) {
@@ -123,14 +124,19 @@ function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <motion.div
+      className="flex justify-center items-center"
+      initial={{ opacity: 0, y: -300 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ type: "spring", damping: 20, duration: 0.3 }}
+    >
       <button
         className="bg-[#18D860] tracking-wider text-gray-50 px-9 py-4 rounded-full hover:scale-105  active:scale-95 transition-all w-72  gap-2 "
         onClick={buildPlaylist}
       >
         {buttonText}
       </button>
-    </div>
+    </motion.div>
   );
 }
 
