@@ -123,9 +123,9 @@ function CreatePlaylist({ songTitle, artist, selectedPeriod, userName }) {
   };
 
   return (
-    <div>
+    <div className="flex justify-center items-center">
       <button
-        className="bg-[#18D860] tracking-wider text-gray-50 px-9 py-4 rounded-full hover:scale-105  active:scale-95 transition-all w-72 flex gap-2 justify-center items-center"
+        className="bg-[#18D860] tracking-wider text-gray-50 px-9 py-4 rounded-full hover:scale-105  active:scale-95 transition-all w-72  gap-2 "
         onClick={buildPlaylist}
       >
         {buttonText}
