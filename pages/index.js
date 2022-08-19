@@ -25,7 +25,6 @@ export default function Home() {
 
   function handleReset() {
     setSearchResult([]);
-    setFormInput("");
     setIsActive(false);
   }
 
