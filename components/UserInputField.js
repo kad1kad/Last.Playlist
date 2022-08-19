@@ -2,12 +2,14 @@ import { motion } from "framer-motion";
 
 function UserInputField({ handleInput, search, handlePeriod }) {
   return (
+    // Animates Input on page load
     <motion.div
       initial={{ opacity: 0, y: -60 }}
       animate={{ opacity: 1, y: 10 }}
       transition={{ type: "spring", damping: 20, duration: 0.5 }}
       className=" py-4 flex flex-col justify-center items-center  scroll-smooth"
     >
+      {/* Animates Input moving up after MusicList mounts */}
       <motion.form
         layout
         transition={{ type: "spring", duration: 1.3 }}
