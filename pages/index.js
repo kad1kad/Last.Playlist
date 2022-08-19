@@ -4,6 +4,7 @@ import MusicList from "../components/MusicList";
 import CreatePlaylist from "../components/CreatePlaylist";
 import PeriodSelector from "../components/PeriodSelector";
 import UserInputField from "../components/UserInputField";
+import Head from "next/head";
 
 export default function Home() {
   const [formInput, setFormInput] = useState({});
@@ -43,16 +44,24 @@ export default function Home() {
 
   return (
     <div className="bg-neutral-100 w-full text-slate-900 min-h-[100vh] pb-5">
+      <Head>
+        <title>Last.Playlist</title>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="description"
+          content="Last.fm to Spotify Playlist generator"
+        />
+        <meta name="keywords" content="Last.fm, Spotify, Playlist" />
+      </Head>
+
       <header className="px-4 flex justify-between items-center bg-[#101113] py-5">
         <div>
-          <a>
-            <h1
-              className="text-2xl tracking-widest font-bold text-neutral-200 cursor-pointer"
-              onClick={handleReset}
-            >
-              Last.Playlist
-            </h1>
-          </a>
+          <h1
+            className="text-2xl tracking-widest font-bold text-neutral-200 cursor-pointer"
+            onClick={handleReset}
+          >
+            Last.Playlist
+          </h1>
 
           <h2 className="text-sm font-light tracking-wider text-neutral-200">
             Last.fm to Spotify Playlist
