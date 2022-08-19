@@ -21,14 +21,11 @@ export default function Home() {
   function handlePeriod(e) {
     const period = e.target.value;
     setSelectedPeriod(period);
-
-    if (formInput.length > 2) {
-      search(e);
-    }
   }
 
   function handleReset() {
     setSearchResult([]);
+    setFormInput("");
     setIsActive(false);
   }
 
