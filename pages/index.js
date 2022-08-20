@@ -7,6 +7,8 @@ import UserInputField from "../components/UserInputField";
 import Head from "next/head";
 
 export default function Home() {
+  const apiKey = process.env.NEXT_PUBLIC_SPOTIFY_API_KEY;
+
   const [formInput, setFormInput] = useState({});
   const [searchResult, setSearchResult] = useState([]);
   const [selectedPeriod, setSelectedPeriod] = useState("overall");
@@ -14,6 +16,7 @@ export default function Home() {
 
   function handleInput(e) {
     const userInput = e.target.value;
+
     setFormInput(userInput);
   }
 
@@ -32,7 +35,7 @@ export default function Home() {
   const search = async (e) => {
     e.preventDefault();
     const res = await fetch(
-      `https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=${formInput}&limit=20&period=${selectedPeriod}&api_key=dd0a78c04c8e1bd9d7719ab1ef184ad1&format=json`
+      `https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=${formInput}&limit=20&period=${selectedPeriod}&api_key=${apiKey}&format=json`
     );
     const musicItems = await res.json();
     setSearchResult(musicItems);
@@ -43,7 +46,7 @@ export default function Home() {
   const artist = searchResult.toptracks?.track.map((item) => item.artist.name);
 
   return (
-    <div className="bg-neutral-100 w-full text-slate-900 min-h-[100vh] pb-5">
+    <div className="bg-neutral-100 w-full text-slate-900 min-h-[100vh] pb-5 ">
       <Head>
         <title>Last.Playlist</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
