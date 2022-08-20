@@ -13,14 +13,13 @@ export default function Home() {
   const [searchResult, setSearchResult] = useState([]);
   const [selectedPeriod, setSelectedPeriod] = useState("overall");
   const [isActive, setIsActive] = useState(false);
+  const [userNotFound, setUserNotFound] = useState("");
+  const [error, setError] = useState(false);
 
   function handleInput(e) {
     const userInput = e.target.value;
-
     setFormInput(userInput);
   }
-
-  console.log(formInput);
 
   function handlePeriod(e) {
     const period = e.target.value;
@@ -38,8 +37,16 @@ export default function Home() {
       `https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=${formInput}&limit=20&period=${selectedPeriod}&api_key=${apiKey}&format=json`
     );
     const musicItems = await res.json();
-    setSearchResult(musicItems);
-    setIsActive(true);
+
+    // If user not found, throw error and don't display an empty list
+    if (musicItems.error !== 6) {
+      setError(false);
+      setSearchResult(musicItems);
+      setIsActive(true);
+    } else {
+      setError(true);
+      setUserNotFound("User not found. Please check the spelling :-)");
+    }
   };
 
   const songTitle = searchResult.toptracks?.track.map((item) => item.name);
@@ -80,6 +87,8 @@ export default function Home() {
         }`}
       >
         <section className="flex-col justify-center">
+          {error && <p className="text-center text-sm">{userNotFound}</p>}
+
           <UserInputField
             handleInput={handleInput}
             handlePeriod={handlePeriod}
