@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-function UserInputField({ handleInput, search, handlePeriod }) {
+function UserInputField({ handleInput, search }) {
   return (
     // Animates Input on page load
     <motion.div
