@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Login Component Show Log Out when has session 1`] = `
+<div>
+  <nav
+    class="flex gap-3 text-xs"
+  >
+    <button
+      class="border-neutral-200 text-neutral-200 tracking-wider w-20 h-8 border-2 rounded-full"
+    >
+      Sign out
+    </button>
+  </nav>
+</div>
+`;
