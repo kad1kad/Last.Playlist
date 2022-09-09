@@ -13,10 +13,9 @@ export default function Home() {
   const [searchResult, setSearchResult] = useState([]);
   const [selectedPeriod, setSelectedPeriod] = useState("overall");
   const [isActive, setIsActive] = useState(false);
-  const [userNotFound, setUserNotFound] = useState("");
   const [error, setError] = useState(false);
 
-  function handleInput(e) {
+  function handleChange(e) {
     const userInput = e.target.value;
     setFormInput(userInput);
   }
@@ -44,8 +43,7 @@ export default function Home() {
       setSearchResult(musicItems);
       setIsActive(true);
     } else {
-      setError(true);
-      setUserNotFound("User not found. Please check the spelling :-)");
+      setError("User not found");
     }
   };
 
@@ -87,12 +85,13 @@ export default function Home() {
         }`}
       >
         <section className="flex-col justify-center">
-          {error && <p className="text-center text-sm">{userNotFound}</p>}
+          {error && <p className="text-center text-sm">{error}</p>}
 
           <UserInputField
-            handleInput={handleInput}
+            handleChange={handleChange}
             handlePeriod={handlePeriod}
             search={search}
+            formInput={formInput}
           />
 
           <PeriodSelector handlePeriod={handlePeriod} search={search} />

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 
-function UserInputField({ handleInput, search }) {
+function UserInputField({ handleChange, search }) {
   return (
     // Animates Input on page load
     <motion.div
@@ -19,7 +19,7 @@ function UserInputField({ handleInput, search }) {
           id="userInput"
           type="text"
           className="rounded-full border-2 mr-5 py-4 px-6 text-slate-900 bg-white tracking-wide"
-          onChange={handleInput}
+          onChange={handleChange}
           placeholder="Last.fm User"
           spellCheck="false"
           required
