@@ -1,6 +1,7 @@
-import { render, screen } from "@testing-library/react";
-import LoginDisplay from "../components/LoginDisplay";
+import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import Home from "../pages/index";
+import userEvent from "@testing-library/user-event";
 
 jest.mock("next-auth/react", () => {
   const originalModule = jest.requireActual("next-auth/react");
@@ -17,10 +18,42 @@ jest.mock("next-auth/react", () => {
 });
 
 describe("Login Component", () => {
-  it("Show Log Out when has session", async () => {
-    const { container } = render(<LoginDisplay />);
+  it("Show Sign out when not signed in", async () => {
+    render(<Home />);
+    const singOutBtn = screen.getByRole("button", { name: /sign out/i });
 
-    expect(container).toMatchSnapshot();
-    expect(screen.getByText("Sign out")).toBeInTheDocument();
+    expect(singOutBtn).toBeInTheDocument();
+  });
+});
+
+describe("Header Component", () => {
+  test("Displays correct Page Heading and Subtitle", () => {
+    render(<Home />);
+    const pageHeading = screen.getByRole("heading", { name: "Last.Playlist" });
+    const subHeading = screen.getByRole("heading", {
+      name: "Last.fm to Spotify Playlist",
+    });
+
+    expect(pageHeading).toBeInTheDocument();
+    expect(subHeading).toBeInTheDocument();
+  });
+});
+
+describe("UserInputField", () => {
+  test("Render UserInputField", () => {
+    render(<Home />);
+
+    const userInput = screen.getByRole("textbox", { id: "userInput" });
+
+    expect(userInput).toBeInTheDocument();
+  });
+
+  test("Can type into UserInputField", async () => {
+    render(<Home />);
+
+    const userInput = screen.getByRole("textbox");
+    userEvent.type(userInput, "test");
+
+    await waitFor(() => expect(userInput.value).toBe("test"));
   });
 });
