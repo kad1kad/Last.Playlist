@@ -2,6 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Home from "../pages/index";
 import userEvent from "@testing-library/user-event";
+import UserInputField from "../components/UserInputField";
 
 jest.mock("next-auth/react", () => {
   const originalModule = jest.requireActual("next-auth/react");
@@ -51,9 +52,38 @@ describe("UserInputField", () => {
   test("Can type into UserInputField", async () => {
     render(<Home />);
 
-    const userInput = screen.getByRole("textbox");
-    userEvent.type(userInput, "test");
+    getUserName();
+    userEvent.type(getUserName(), "test");
 
-    await waitFor(() => expect(userInput.value).toBe("test"));
+    await waitFor(() => expect(getUserName().value).toBe("test"));
+  });
+
+  test("form is being submited", async () => {
+    const onSubmit = jest.fn();
+    render(<UserInputField onSubmit={onSubmit} />);
+    userEvent.click(screen.getByRole("button", { name: /submit/i }));
+
+    await waitFor(() => {
+      expect(onSubmit).toHaveBeenCalled();
+    });
+  });
+
+  test("errorhandling", async () => {
+    const onSubmit = jest.fn();
+    render(<UserInputField onSubmit={onSubmit} />);
+
+    getUserName();
+
+    userEvent.type(getUserName(), "thisUserDoesNotExist");
+
+    userEvent.click(screen.getByRole("button", { name: /submit/i }));
+
+    await waitFor(() => {
+      expect(screen.getByText(/user not found/i).toBeInTheDocument());
+    });
   });
 });
+
+function getUserName() {
+  return screen.getByRole("textbox");
+}
