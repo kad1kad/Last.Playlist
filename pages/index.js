@@ -1,10 +1,10 @@
-import LoginDisplay from "../components/LoginDisplay";
 import { useState } from "react";
 import MusicList from "../components/MusicList";
 import CreatePlaylist from "../components/CreatePlaylist";
 import PeriodSelector from "../components/PeriodSelector";
 import UserInputField from "../components/UserInputField";
 import Head from "next/head";
+import Header from "../components/Header";
 
 export default function Home() {
   const apiKey = process.env.NEXT_PUBLIC_SPOTIFY_API_KEY;
@@ -30,7 +30,7 @@ export default function Home() {
     setIsActive(false);
   }
 
-  const search = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch(
       `https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=${formInput}&limit=20&period=${selectedPeriod}&api_key=${apiKey}&format=json`
@@ -62,22 +62,11 @@ export default function Home() {
         <meta name="keywords" content="Last.fm, Spotify, Playlist" />
       </Head>
 
-      <header className="px-4 flex justify-between items-center bg-[#101113] py-5">
-        <div>
-          <h1
-            className="text-2xl tracking-widest font-bold text-neutral-200 cursor-pointer"
-            onClick={handleReset}
-          >
-            Last.Playlist
-          </h1>
-
-          <h2 className="text-sm font-light tracking-wider text-neutral-200">
-            Last.fm to Spotify Playlist
-          </h2>
-        </div>
-
-        <LoginDisplay />
-      </header>
+      <Header
+        handleReset={handleReset}
+        pageHeading="Last.Playlist"
+        pageSubHeading="Last.fm to Spotify Playlist"
+      />
 
       <main
         className={`justify-center items-center min-h-[88vh] ${
@@ -85,16 +74,15 @@ export default function Home() {
         }`}
       >
         <section className="flex-col justify-center">
-          {error && <p className="text-center text-sm">{error}</p>}
-
           <UserInputField
             handleChange={handleChange}
             handlePeriod={handlePeriod}
-            search={search}
+            onSubmit={onSubmit}
             formInput={formInput}
+            error={error}
           />
 
-          <PeriodSelector handlePeriod={handlePeriod} search={search} />
+          <PeriodSelector handlePeriod={handlePeriod} />
         </section>
 
         <MusicList musicItems={searchResult} />
