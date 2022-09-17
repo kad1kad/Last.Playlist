@@ -37,13 +37,14 @@ export default function Home() {
     );
     const musicItems = await res.json();
 
+    setError(false);
+    setSearchResult(musicItems);
+    setIsActive(true);
+
     // If user not found, throw error and don't display an empty list
-    if (musicItems.error !== 6) {
-      setError(false);
-      setSearchResult(musicItems);
-      setIsActive(true);
-    } else {
-      setError("User not found");
+    if (musicItems.message === "User not found") {
+      setIsActive(false);
+      setError(musicItems.message);
     }
   };
 
