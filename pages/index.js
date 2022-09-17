@@ -12,8 +12,8 @@ export default function Home() {
   const [formInput, setFormInput] = useState({});
   const [searchResult, setSearchResult] = useState([]);
   const [selectedPeriod, setSelectedPeriod] = useState("overall");
-  const [isActive, setIsActive] = useState(false);
-  const [error, setError] = useState(false);
+  const [flex, setFlex] = useState(false);
+  const [error, setError] = useState(true);
 
   function handleChange(e) {
     const userInput = e.target.value;
@@ -27,7 +27,7 @@ export default function Home() {
 
   function handleReset() {
     setSearchResult([]);
-    setIsActive(false);
+    setFlex(false);
   }
 
   const onSubmit = async (e) => {
@@ -36,15 +36,15 @@ export default function Home() {
       `https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=${formInput}&limit=20&period=${selectedPeriod}&api_key=${apiKey}&format=json`
     );
     const musicItems = await res.json();
-
+    console.log(musicItems);
     setError(false);
     setSearchResult(musicItems);
-    setIsActive(true);
+    setFlex(true);
 
     // If user not found, throw error and don't display an empty list
-    if (musicItems.message === "User not found") {
-      setIsActive(false);
-      setError(musicItems.message);
+    if (musicItems.error) {
+      setFlex(false);
+      setError("User not found");
     }
   };
 
@@ -71,7 +71,7 @@ export default function Home() {
 
       <main
         className={`justify-center items-center min-h-[88vh] ${
-          isActive ? "flex-col" : "flex"
+          flex ? "flex-col" : "flex"
         }`}
       >
         <section className="flex-col justify-center">
@@ -88,7 +88,7 @@ export default function Home() {
 
         <MusicList musicItems={searchResult} />
 
-        {searchResult.length === undefined && formInput.length >= 1 && (
+        {!error && (
           <CreatePlaylist
             songTitle={songTitle}
             artist={artist}
