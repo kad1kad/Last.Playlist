@@ -30,7 +30,7 @@ function UserInputField({ handleChange, onSubmit, error }) {
           aria-errormessage="userNotFoundError"
           aria-invalid="true"
           type="text"
-          className="rounded-full border-2 mr-5 py-4 px-6 text-slate-900 bg-white tracking-wide"
+          className="rounded-full border-2 mr-5 py-4 px-4 text-slate-900 bg-white tracking-wide"
           onChange={handleChange}
           placeholder="Last.fm User"
           spellCheck="false"
