@@ -5,6 +5,7 @@ import PeriodSelector from "../components/PeriodSelector";
 import UserInputField from "../components/UserInputField";
 import Head from "next/head";
 import Header from "../components/Header";
+import Intro from "../components/Intro";
 
 export default function Home() {
   const apiKey = process.env.NEXT_PUBLIC_SPOTIFY_API_KEY;
@@ -63,8 +64,10 @@ export default function Home() {
         pageSubHeading="Last.fm to Spotify Playlist"
       />
 
+      <Intro />
+
       <main
-        className={`justify-center items-center min-h-[88vh] ${
+        className={`justify-center items-center py-5 ${
           flex ? "flex-col" : "flex"
         }`}
       >
