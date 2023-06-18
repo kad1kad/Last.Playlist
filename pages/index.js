@@ -25,11 +25,6 @@ export default function Home() {
     setSelectedPeriod(period);
   }
 
-  function handleReset() {
-    setSearchResult([]);
-    setFlex(false);
-  }
-
   const onSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch(
@@ -64,7 +59,6 @@ export default function Home() {
       </Head>
 
       <Header
-        handleReset={handleReset}
         pageHeading="Last.Playlist"
         pageSubHeading="Last.fm to Spotify Playlist"
       />
