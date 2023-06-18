@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import Link from "next/link";
 
 function MusicItem({ item }) {
   return (
@@ -11,14 +10,12 @@ function MusicItem({ item }) {
       key={item.name}
       src={item.name}
     >
-      <Link href={item.url}>
-        <a>
-          <li className="leading-8 text-center">
-            <h3 className="inline "> {item.artist.name} – </h3>
-            <p className="inline">{item.name} </p>
-          </li>
-        </a>
-      </Link>
+      <a>
+        <li className="leading-8 text-center">
+          <h3 className="inline "> {item.artist.name} – </h3>
+          <p className="inline">{item.name} </p>
+        </li>
+      </a>
     </motion.div>
   );
 }
