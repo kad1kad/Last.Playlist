@@ -37,7 +37,7 @@ function UserInputField({ handleChange, onSubmit, error }) {
         />
         <button
           type="submit"
-          className="bg-[#101113] tracking-widest text-neutral-200 px-14 py-4 rounded-full hover:scale-105 transition-all active:scale-95 w-26"
+          className="bg-[#101113] tracking-widest text-neutral-200 px-4 py-4 rounded-full hover:scale-105 transition-all active:scale-95 w-26 md:px-20"
         >
           Submit
         </button>
