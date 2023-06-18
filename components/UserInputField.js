@@ -7,14 +7,14 @@ function UserInputField({ handleChange, onSubmit, error }) {
       initial={{ opacity: 0, y: -60 }}
       animate={{ opacity: 1, y: 10 }}
       transition={{ type: "spring", damping: 20, duration: 0.5 }}
-      className=" py-4 flex flex-col justify-center items-center  scroll-smooth"
+      className="flex flex-col items-center justify-center py-4 scroll-smooth"
     >
       {error && (
         <p
           id="userNotFoundError"
           role="alert"
           aria-live="assertive"
-          className="text-center text-sm mb-5 text-red-500"
+          className="mb-5 text-sm text-center text-red-500"
         >
           {error}
         </p>
@@ -30,14 +30,14 @@ function UserInputField({ handleChange, onSubmit, error }) {
           aria-errormessage="userNotFoundError"
           aria-invalid="true"
           type="text"
-          className="rounded-full border-2 mr-5 py-4 px-4 text-slate-900 bg-white tracking-wide"
+          className="px-3 py-4 mr-3 tracking-wide bg-white border-2 rounded-full text-slate-900 md:px-40"
           onChange={handleChange}
-          placeholder="Last.fm User"
+          placeholder="Search Last.fm User"
           spellCheck="false"
         />
         <button
           type="submit"
-          className="bg-[#101113] tracking-widest text-neutral-200 px-8 py-4 rounded-full hover:scale-105 transition-all active:scale-95 w-26"
+          className="bg-[#101113] tracking-widest text-neutral-200 px-14 py-4 rounded-full hover:scale-105 transition-all active:scale-95 w-26"
         >
           Submit
         </button>
