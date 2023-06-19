@@ -1,24 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, install the dependencies:
-
-```bash
-npm i
-```
-
-Run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
 ## Learn More
 
-This is a web app to port any Last.fm users most listened tracks into a Spotify playlist.
+This is a web app bootstrapped with [Next.js](https://nextjs.org/) to port any Last.fm users most listened tracks into a Spotify playlist.
 It uses the [Last.fm API](https://www.last.fm/api/) to fetch music listening data of any specified user and integrates with [Spotify Web API Node](https://github.com/thelinmichael/spotify-web-api-node) to generate playlists on a logged-in Spotify account. The authetication is established via [NextAuth](https://github.com/nextauthjs/next-auth) and I've used [Tailwind CSS](https://github.com/tailwindlabs/tailwindcss) for styling. The [live version](https://lastplaylist.vercel.app) is hosted on Vercel.
 
 ## How to
