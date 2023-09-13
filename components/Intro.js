@@ -65,8 +65,7 @@ function Intro() {
         </p>
         <p>
           If you don&apos;t have a Last.fm account to fetch the relevant data,
-          search for one of these usernames, to try it out: Heuxone,
-          Brauzepulver.
+          search for this username to try it out: Brauzepulver.
         </p>
         <ul>
           <li>1. Login with your Spotify Account</li>
